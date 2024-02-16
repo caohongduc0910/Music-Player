@@ -136,7 +136,7 @@ const app = {
             if(!app.isDark){
                 app.isDark = true
                 $('.fa-toggle-off').classList.remove('unactive')
-                body.style.backgroundImage = `linear-gradient(#78ddfa, #85e0fa, #93e3fb, #a0e7fb, #aeeafc)`
+                body.style.backgroundImage = `linear-gradient(#4fd4f9, #64d1ef, #79d5f1, #99e1f5, #aeeafc)`
                 $('.fa-toggle-on').classList.add('unactive')
             }
             else{
