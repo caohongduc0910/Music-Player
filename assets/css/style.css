@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #ec1f55;
+    --primary-color: green;
     --text-color: #333;
   }
   
@@ -91,7 +91,7 @@
   }
   
   .control .btn {
-    color: #666;
+    color: #a3a2a2;
     padding: 18px;
     font-size: 15px;
     height: 56px;
@@ -188,22 +188,26 @@
     display: flex;
     align-items: center;
     margin-bottom: 12px;
-    background-color: #fff;
+    /* background-color: #fff; */
     padding: 8px 16px;
     border-radius: 5px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to left,#e0dfdf 50%, #7fbf64 50%) right;
+    background-size: 200%;
+    transition: .7s ease-out;
   }
 
   .song:hover{
     cursor: pointer;
-    background-color: #e2dcdc;
+    background-position: left;
   }
 
   .song:active {
     opacity: 0.8;
   }
   .song.active {
-    background-color: var(--primary-color);
+    background: none;
+    background-color: var(--primary-color) !important;
   }
 
   .song.active .option,
