@@ -1,6 +1,7 @@
 const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
 
+const body = $('body')
 const cd = $('.cd')
 const heading = $('.dashboard h2')
 const thumb = $('.cd-thumb')
@@ -16,6 +17,7 @@ const song = $('.song')
 const playlist = $('.playlist')
 const duration = $('.duration')
 const remaining = $('.remaining')
+const offBtn = $('.onof')
 
 
 const app = {
@@ -24,6 +26,8 @@ const app = {
     isPlaying: false,
     isRandom: false,
     isRepeat: false,
+    isDark: false,
+
     songs: [
         {
             name: 'Em gái mưa',
@@ -126,6 +130,23 @@ const app = {
                 audio.pause()
             }
         }
+
+        //Bright and Dark mode
+        offBtn.onclick = function() {
+            if(!app.isDark){
+                app.isDark = true
+                $('.fa-toggle-off').classList.remove('unactive')
+                body.style.backgroundImage = `linear-gradient(#78ddfa, #85e0fa, #93e3fb, #a0e7fb, #aeeafc)`
+                $('.fa-toggle-on').classList.add('unactive')
+            }
+            else{
+                app.isDark = false
+                $('.fa-toggle-on').classList.remove('unactive') 
+                body.style.backgroundImage = `linear-gradient(#131862,#2e4482, #546bab, #87889c, #bea9de)`
+                $('.fa-toggle-off').classList.add('unactive') 
+            }
+        }
+
         //CD rotation
         const cdAnimation = thumb.animate([
             { transform: "rotate(0)" },
@@ -150,7 +171,8 @@ const app = {
             cdAnimation.pause()
         }
         
-        //Progress Line movement
+        
+        //Progress Line movement and Time Changing
         audio.ontimeupdate = function () {
             if (audio.duration) {
                 const progressPercentage = Math.floor(audio.currentTime / audio.duration * 100)
@@ -162,7 +184,7 @@ const app = {
             
         }
         
-        //Tua bai hat
+        //SongJumping
         progress.onchange = function (e) {
             const progressPercentageChange = (e.target.value * audio.duration) / 100
             audio.currentTime = progressPercentageChange
@@ -278,12 +300,13 @@ const app = {
     },
 
     run: function () {
-        //Lay du lieu bai hat dau tien
+        //Loading 1st song
         this.defineProperties()
+        //Loanding all song's details
         this.loadCurrentSong()
-        //Xu li thu nho thumb khi scroll
+        //Handle Events
         this.handleEvents()
-        //Cap nhat bai hat vao Playlist
+        //Updating Playlist
         this.render()
     }
 }
